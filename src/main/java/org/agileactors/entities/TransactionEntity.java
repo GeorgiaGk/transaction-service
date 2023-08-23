@@ -2,10 +2,7 @@ package org.agileactors.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.agileactors.enums.Currency;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -18,7 +15,8 @@ import java.util.UUID;
  * Entity representing a transaction.
  */
 @Entity
-@Data
+@Setter
+@Getter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -61,7 +59,6 @@ public class TransactionEntity {
      * The timestamp when the transaction occurred.
      */
     @CreationTimestamp
-    @Column(nullable = false)
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
     private Timestamp transactionDate;
 }

@@ -8,7 +8,7 @@ import org.agileactors.entities.TransactionEntity;
 import org.agileactors.exceptions.AccountNotFoundException;
 import org.agileactors.exceptions.InsufficientBalanceException;
 import org.agileactors.exceptions.SameAccountTransferException;
-import org.agileactors.exceptions.WrongCurrencyException;
+import org.agileactors.exceptions.CurrencyMismatchException;
 import org.agileactors.repositories.TransactionEntityRepository;
 import org.agileactors.services.interfaces.AccountService;
 import org.agileactors.services.interfaces.TransactionService;
@@ -22,6 +22,10 @@ import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+/**
+ * Service implementation for managing transactions.
+ * This class provides methods to perform transaction-related operations.
+ */
 @Slf4j
 @AllArgsConstructor
 @Service
@@ -31,6 +35,12 @@ public class TransactionServiceImpl implements TransactionService {
 
     /**
      * {@inheritDoc}
+     * The exceptions that are being thrown are handled by {@link org.agileactors.exceptions.ControllerExceptionHandler}.
+     *
+     * @throws SameAccountTransferException when source and target accounts are the same
+     * @throws AccountNotFoundException when source or target account does not exist
+     * @throws InsufficientBalanceException when source account does not have enough balance
+     * @throws CurrencyMismatchException   when source and target account currencies are not the same
      */
     @Transactional
     @Override
@@ -60,7 +70,7 @@ public class TransactionServiceImpl implements TransactionService {
             log.error("Source and target account currencies should be the same as the transaction currency. " +
                     "sourceCurrency={}, targetCurrency={}, transactionCurrency={}",
                     sourceAccount.getCurrency(), targetAccount.getCurrency(), transaction.getCurrency());
-            throw new WrongCurrencyException("Source and target account currencies should be the same as the transaction currency");
+            throw new CurrencyMismatchException("Source and target account currencies should be the same as the transaction currency");
         }
 
         BigDecimal newSourceAccountBalance = sourceAccount.getBalance().subtract(transaction.getAmount());

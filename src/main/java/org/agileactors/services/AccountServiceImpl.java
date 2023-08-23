@@ -1,6 +1,7 @@
 package org.agileactors.services;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.agileactors.entities.AccountEntity;
 import org.agileactors.repositories.AccountEntityRepository;
 import org.agileactors.services.interfaces.AccountService;
@@ -13,6 +14,7 @@ import java.util.Optional;
 /**
  * Service implementation for managing account-related operations.
  */
+@Slf4j
 @AllArgsConstructor
 @Service
 public class AccountServiceImpl implements AccountService {
@@ -20,6 +22,7 @@ public class AccountServiceImpl implements AccountService {
 
     /**
      * {@inheritDoc}
+     * We cache the accounts, so we don't have to query the database every time
      */
     @Cacheable("accounts")
     @Override
@@ -33,6 +36,7 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public void updateAccountBalance(AccountEntity account, BigDecimal newBalance) {
         account.setBalance(newBalance);
+        log.info("Updated balance for account={} to {}", account.getId(), newBalance);
         accountEntityRepository.save(account);
     }
 }

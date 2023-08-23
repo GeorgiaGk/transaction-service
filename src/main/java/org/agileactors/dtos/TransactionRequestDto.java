@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 /**
  * Data Transfer Object (DTO) representing a transaction request.
  */
-@Data
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
 public class TransactionRequestDto {

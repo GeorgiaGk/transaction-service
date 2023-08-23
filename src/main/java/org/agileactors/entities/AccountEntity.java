@@ -2,9 +2,7 @@ package org.agileactors.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.agileactors.enums.Currency;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -15,7 +13,8 @@ import java.sql.Timestamp;
  * Entity representing an account.
  */
 @Entity
-@Data
+@Setter
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "ACCOUNT")
@@ -45,7 +44,6 @@ public class AccountEntity {
      * The timestamp when the account was created.
      */
     @CreationTimestamp
-    @Column(nullable = false)
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
     private Timestamp createdAt;
 }

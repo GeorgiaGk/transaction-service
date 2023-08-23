@@ -5,8 +5,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import javax.security.auth.login.AccountNotFoundException;
-
 /**
  * Global exception handler for the controller layer.
  */
@@ -20,7 +18,7 @@ public class ControllerExceptionHandler {
      * @param ex The exception that occurred.
      * @return A {@link ResponseEntity} with a status of {@link HttpStatus#BAD_REQUEST} (400) and an error message.
      */
-    @ExceptionHandler({SameAccountTransferException.class, InsufficientBalanceException.class, WrongCurrencyException.class})
+    @ExceptionHandler({SameAccountTransferException.class, InsufficientBalanceException.class, CurrencyMismatchException.class})
     public ResponseEntity<String> handleBadRequestException(RuntimeException ex) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
     }

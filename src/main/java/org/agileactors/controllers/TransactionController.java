@@ -1,6 +1,7 @@
-package org.agileactors.controller;
+package org.agileactors.controllers;
 
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.agileactors.dtos.TransactionRequestDto;
 import org.agileactors.dtos.TransactionResponseDto;
 import org.agileactors.entities.TransactionEntity;
@@ -14,13 +15,13 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+/**
+ * Controller class for managing transactions.
+ */
 @RestController
+@RequiredArgsConstructor
 public class TransactionController {
     private final TransactionServiceImpl transactionService;
-
-    public TransactionController(TransactionServiceImpl transactionService) {
-        this.transactionService = transactionService;
-    }
 
     /**
      * Creates a new transaction based on the provided {@link TransactionRequestDto}.
