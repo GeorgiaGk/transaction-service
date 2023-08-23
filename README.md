@@ -22,6 +22,12 @@ This microservice is designed to handle financial transactions between bank acco
 - Given source or target account does not exist
 - When a transaction request is received then the balance of the existing account should remain the same and the client of the API should receive an error.
 
+### Case 5 - Erroneous currency
+- Given the presence of both source and target accounts
+- Either the source or target account is denominated in 'EUR', while the other bears a 'USD' currency
+- Upon receiving a transaction request from the 'EUR'-designated account, an error is triggered. This error is a result of the second account exclusively accepting transactions in 'USD', and vice versa.
+- The API should receive an error.
+
 ## Data Model
 
 ### Account
@@ -38,6 +44,15 @@ Represents a financial transaction with the following attributes:
 - targetAccountId: ID of the account receiving funds
 - amount: Amount being transferred (positive decimal)
 - currency: Currency of the transaction
+- transactionDate: Date of the transaction 
+
+##  Documentation
+This project includes extensive documentation using JavaDoc comments. The documentation provides detailed information about the classes, methods, and parameters used in the implementation.
+
+To view the JavaDoc documentation:
+
+Package the project (mvn clean package)
+Open target/site/apidocs/index.html using any web browser to access the JavaDoc documentation.
 
 ## How to run transaction-service
 
@@ -46,9 +61,7 @@ To run the Transaction Service, follow these steps:
 1. Clone the repository or download the source code.
 2. Open the project in your preferred Java IDE.
 3. Build the project using Maven (```mvn clean package```) or your IDE.
-4. Run `Main.main()` to start the game.
-
-Upon running the service, the program will simulate 100 rounds of the game, displaying the results at the end
+4. Run `TransactionServiceApplication.main()` to start the transaction-service.
 
 ## How to run Unit Tests
 
