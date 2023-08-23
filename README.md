@@ -2,36 +2,36 @@
 
 This microservice is designed to handle financial transactions between bank accounts. It provides a RESTful API to facilitate money transfers, considering various acceptance criteria outlined below.
 
-### Criteria
+## Criteria
 
-## Case 1: Happy path for money transfer between two accounts
+### Case 1 - Happy path for money transfer between two accounts
 - Given source account and target account exist
 - Source account has a balance greater or equal to the transaction amount
 - When a transaction request is received then, the balance of the source account should be debited and the balance of the target account should be credited.
 
-## Case 2 - Insufficient balance to process money transfer
+### Case 2 - Insufficient balance to process money transfer
 - Given source account and target account exist
 - Source account has a balance less than the transaction amount
 - When a transaction request is received then the balance of the source account as well as the target account, should remain the same. The client of the API should receive an error.
 
-## Case 3 - Transfer between the same account
+### Case 3 - Transfer between the same account
 - Given source account exists and both source and target accounts are the same
 - When a transaction request is received then the balance of the source account should remain the same and the client of the API should receive an error.
 
-## Case 4 - One or more of the accounts does not exist
+### Case 4 - One or more of the accounts does not exist
 - Given source or target account does not exist
 - When a transaction request is received then the balance of the existing account should remain the same and the client of the API should receive an error.
 
-### Data Model
+## Data Model
 
-## Account
+### Account
 Represents a bank account with the following attributes:
 - id: Unique identifier of the account
 - balance: Current balance in the account (positive decimal)
 - currency: Currency of the account
 - createdAt: Date when the account was created
 
-## Transaction
+### Transaction
 Represents a financial transaction with the following attributes:
 - id: Unique identifier of the transaction
 - sourceAccountId: ID of the account sending funds
@@ -39,7 +39,7 @@ Represents a financial transaction with the following attributes:
 - amount: Amount being transferred (positive decimal)
 - currency: Currency of the transaction
 
-### How to Run the
+## How to run transaction-service
 
 To run the Transaction Service, follow these steps:
 
@@ -50,7 +50,7 @@ To run the Transaction Service, follow these steps:
 
 Upon running the service, the program will simulate 100 rounds of the game, displaying the results at the end
 
-### How to run Unit Tests
+## How to run Unit Tests
 
 The transactions logic is accompanied by unit tests implemented using the JUnit and Mockito frameworks. The tests ensure that the money transfer logic is working correctly and producing the expected outcomes for different scenarios. To run the tests,
 follow these steps:
